@@ -4,6 +4,10 @@ This project aims to let you use a ListView menu similar to the one in the new G
 
 ![Screenshot](GoogleNavigationDrawer.jpg)
 
+## About This Fork
+
+I modify selected effect.
+
 ## Index
 * [Features](#features)
 * [How to use](#how-to-use)
@@ -29,36 +33,12 @@ With GoogleNavigationDrawerMenu you can:
 
 ###1. Include the library:
 
-  **Manually (Option A):**
-
-  Download the source code and import ```GoogleNavigationDrawerMenuLibrary``` folder as a Library Module in Android Studio or as a Project in Eclipse (still not tested).
-
-  **Manually (Option B):**
-
-  * Download the [AAR](aars/GoogleNavigationDrawerMenuLibrary.aar?raw=true).
-  * Put it in the ```aars``` folder of your Android Studio project.
-  * Add a File Dependency or add it to the ```build.gradle``` of your main Module, like this:
-
-        repositories {
-          mavenCentral()
-          flatDir {
-              dirs 'aars'
-          }
-        }
-
-  Notice the ```flatDir``` local maven repository created. Now you will have to add the aar file to the *dependencies* list, as if you were adding it from Maven Central Repository:
-
-        compile 'com.github.semoncat:gnavdrawer-library:+'
-
-
-**Automatic (Gradle):**
-
 Add it to your Application Module's `build.gradle`:
 
 Declare it into your build.gradle
 
     dependencies{
-        compile 'com.github.semoncat:gnavdrawer-library:+'
+        compile 'com.github.semoncat.GoogleNavigationDrawerMenu:gnavdrawer-library:+'
     }
 
 ###2. Use class in XML or code:
