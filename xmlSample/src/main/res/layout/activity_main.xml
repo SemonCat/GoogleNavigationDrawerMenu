@@ -8,7 +8,9 @@
         drawer:list_mainSectionsEntries="@array/navigation_main_sections"
         drawer:list_secondarySectionsEntries="@array/navigation_secondary_sections"
         drawer:list_mainSectionsDrawables="@array/drawable_ids"
-        drawer:list_secondarySectionsDrawables="@array/drawable_ids">
+        drawer:list_secondarySectionsDrawables="@array/drawable_ids"
+        drawer:list_item_text_color_selected="#ffff8800"
+        drawer:list_item_icon_tint_selected="#ffff8800">
 
     <FrameLayout
             android:id="@+id/content_layout"

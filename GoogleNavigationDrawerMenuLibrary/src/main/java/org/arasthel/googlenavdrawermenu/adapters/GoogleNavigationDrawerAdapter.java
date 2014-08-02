@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import org.arasthel.googlenavdrawermenu.R;
+import org.arasthel.googlenavdrawermenu.views.CheckableImageView;
 import org.arasthel.googlenavdrawermenu.views.CheckableRelativeLayout;
 import org.arasthel.googlenavdrawermenu.views.CheckedTextView;
 
@@ -53,6 +54,10 @@ public class GoogleNavigationDrawerAdapter extends BaseAdapter {
     private int mMainBackResId = R.drawable.main_section_background;
     private int mSecondaryBackResId = R.drawable.secondary_section_background;
 
+    private int mItemTextColorSelected = -1;
+    private int mItemIconTintColor = -1;
+    private int mItemIconTintColorSelected = -1;
+
     private Context mContext;
 
     public GoogleNavigationDrawerAdapter(Context context) {
@@ -67,11 +72,28 @@ public class GoogleNavigationDrawerAdapter extends BaseAdapter {
         mSecondarySectionsDrawableIds = secondarySectionsDrawableIds;
     }
 
+    public GoogleNavigationDrawerAdapter(Context context, String[] mainSections, String[] secondarySections, int[] mainSectionsDrawableIds, int[] secondarySectionsDrawableIds,int mItemTextColorSelected, int mItemIconTintColor, int mItemIconTintColorSelected) {
+        this(context, mainSections, secondarySections, mainSectionsDrawableIds, secondarySectionsDrawableIds);
+
+        this.mItemTextColorSelected = mItemTextColorSelected;
+        this.mItemIconTintColor = mItemIconTintColor;
+        this.mItemIconTintColorSelected = mItemIconTintColorSelected;
+    }
+
     public GoogleNavigationDrawerAdapter(Context context, String[] mainSections, String[] secondarySections, int[] mainSectionsDrawableIds, int[] secondarySectionsDrawableIds, int mainBackResId, int secondaryBackResId) {
         this(context, mainSections, secondarySections, mainSectionsDrawableIds, secondarySectionsDrawableIds);
         mMainBackResId = mainBackResId;
         mSecondaryBackResId = secondaryBackResId;
     }
+
+
+    public GoogleNavigationDrawerAdapter(Context context, String[] mainSections, String[] secondarySections, int[] mainSectionsDrawableIds, int[] secondarySectionsDrawableIds, int mainBackResId, int secondaryBackResId,int mItemTextColorSelected, int mItemIconTintColor, int mItemIconTintColorSelected) {
+        this(context, mainSections, secondarySections, mainSectionsDrawableIds, secondarySectionsDrawableIds,mainBackResId,secondaryBackResId);
+        this.mItemTextColorSelected = mItemTextColorSelected;
+        this.mItemIconTintColor = mItemIconTintColor;
+        this.mItemIconTintColorSelected = mItemIconTintColorSelected;
+    }
+
 
     @Override
     public int getItemViewType(int position) {
@@ -121,7 +143,7 @@ public class GoogleNavigationDrawerAdapter extends BaseAdapter {
                     view.setBackgroundResource(mMainBackResId);
                     primaryHolder = new PrimaryHolder();
                     primaryHolder.primaryTextView = (CheckedTextView) view.findViewById(android.R.id.text1);
-                    primaryHolder.primaryImageView = (ImageView) view.findViewById(android.R.id.icon);
+                    primaryHolder.primaryImageView = (CheckableImageView) view.findViewById(android.R.id.icon);
                     primaryHolder.bottomDivider = view.findViewById(R.id.google_nav_drawer_divider_bottom);
                     if(mainDividerHeight != -1) {
                         ((RelativeLayout.LayoutParams) primaryHolder.bottomDivider.getLayoutParams()).height = mainDividerHeight;
@@ -139,6 +161,19 @@ public class GoogleNavigationDrawerAdapter extends BaseAdapter {
                             primaryHolder.bottomDivider.setBackground(mainDividerDrawable);
                         }
                     }
+
+                    if (mItemTextColorSelected!=-1){
+                        primaryHolder.primaryTextView.setCheckedTextColor(mItemTextColorSelected);
+                    }
+
+                    if (mItemIconTintColor!=-1){
+                        primaryHolder.primaryImageView.setIconTintColor(mItemIconTintColor);
+                    }
+
+                    if (mItemIconTintColorSelected!=-1){
+                        primaryHolder.primaryImageView.setIconTintColorChecked(mItemIconTintColorSelected);
+                    }
+
                     view.setTag(primaryHolder);
                 } else {
                     primaryHolder = (PrimaryHolder) view.getTag();
@@ -171,7 +206,7 @@ public class GoogleNavigationDrawerAdapter extends BaseAdapter {
                     holder = new SecondaryHolder();
                     view.setBackgroundResource(mSecondaryBackResId);
                     holder.secondaryTextView = (CheckedTextView) view.findViewById(android.R.id.text1);
-                    holder.secondaryImageView = (ImageView) view.findViewById(android.R.id.icon);
+                    holder.secondaryImageView = (CheckableImageView) view.findViewById(android.R.id.icon);
                     holder.topDivider = view.findViewById(R.id.google_nav_drawer_divider_top);
                     holder.bottomDivider = view.findViewById(R.id.google_nav_drawer_divider_bottom);
                     if(secondaryDividerHeight != -1) {
@@ -194,6 +229,19 @@ public class GoogleNavigationDrawerAdapter extends BaseAdapter {
                             holder.bottomDivider.setBackground(secondaryDividerDrawable);
                         }
                     }
+
+                    if (mItemTextColorSelected!=-1){
+                        holder.secondaryTextView.setCheckedTextColor(mItemTextColorSelected);
+                    }
+
+                    if (mItemIconTintColor!=-1){
+                        holder.secondaryImageView.setIconTintColor(mItemIconTintColor);
+                    }
+
+                    if (mItemIconTintColorSelected!=-1){
+                        holder.secondaryImageView.setIconTintColorChecked(mItemIconTintColorSelected);
+                    }
+
                     view.setTag(holder);
                 } else {
                     holder = (SecondaryHolder) view.getTag();
@@ -255,13 +303,13 @@ public class GoogleNavigationDrawerAdapter extends BaseAdapter {
 
     private class PrimaryHolder {
         public CheckedTextView primaryTextView;
-        public ImageView primaryImageView;
+        public CheckableImageView primaryImageView;
         public View bottomDivider;
     }
 
     private class SecondaryHolder {
         public CheckedTextView secondaryTextView;
-        public ImageView secondaryImageView;
+        public CheckableImageView secondaryImageView;
         public View topDivider;
         public View bottomDivider;
     }

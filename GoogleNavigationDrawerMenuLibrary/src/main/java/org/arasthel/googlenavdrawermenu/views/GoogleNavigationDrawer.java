@@ -59,6 +59,10 @@ public class GoogleNavigationDrawer extends DrawerLayout {
     private int mListMainDivider = -1;
     private int mListSecondaryDivider = -1;
 
+    private int mItemTextColorSelected = -1;
+    private int mItemIconTintColor = -1;
+    private int mItemIconTintColorSelected = -1;
+
     private OnNavigationSectionSelected mSelectionListener;
 
     private String[] mMainSections;
@@ -220,6 +224,12 @@ public class GoogleNavigationDrawer extends DrawerLayout {
             mListSecondaryDivider = typedArray.getColor(R.styleable.GoogleNavigationDrawer_list_secondary_divider, -1);
         }
 
+        mItemTextColorSelected = typedArray.getColor(R.styleable.GoogleNavigationDrawer_list_item_text_color_selected,-1);
+
+        mItemIconTintColor = typedArray.getColor(R.styleable.GoogleNavigationDrawer_list_item_icon_tint,-1);
+
+        mItemIconTintColorSelected = typedArray.getColor(R.styleable.GoogleNavigationDrawer_list_item_icon_tint_selected,-1);
+
         mListPaddingTop = typedArray.getDimensionPixelSize(R.styleable.GoogleNavigationDrawer_list_paddingTop, mListPaddingTop);
         mListPaddingBottom = typedArray.getDimensionPixelSize(R.styleable.GoogleNavigationDrawer_list_paddingBottom, mListPaddingBottom);
         mListPaddingRight = typedArray.getDimensionPixelSize(R.styleable.GoogleNavigationDrawer_list_paddingRight, mListPaddingRight);
@@ -352,7 +362,7 @@ public class GoogleNavigationDrawer extends DrawerLayout {
             if(mListView == null) {
                 configureList();
             }
-            GoogleNavigationDrawerAdapter adapter = new GoogleNavigationDrawerAdapter(getContext(), mainSections, secondarySections, mainDrawableIds, secondaryDrawableIds);
+            GoogleNavigationDrawerAdapter adapter = new GoogleNavigationDrawerAdapter(getContext(), mainSections, secondarySections, mainDrawableIds, secondaryDrawableIds,mItemTextColorSelected,mItemIconTintColor,mItemIconTintColorSelected);
     
             if(mListMainDividerHeight != -1) {
                 adapter.setMainDividerHeight(mListMainDividerHeight);
